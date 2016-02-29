@@ -17,33 +17,34 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
-  eslint: {  
+  eslint: {
     configFile: '.eslintrc'
   },
   module: {
     preLoaders: [{
-      test: /(\.js$)/, 
-      exclude: /node_modules/, 
-      loader: "eslint-loader"
-    }],    
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
+      test: /(\.js$)/,
       exclude: /node_modules/,
-      include: __dirname,
-    },
-    {
-      test: /\.css?$/,
-      loaders: ['style', 'css'],
-      include: __dirname
-    },
-    {
-      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "url-loader?limit=10000&minetype=application/font-woff"
-    },
-    {
-      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "file-loader"
-    }]
+      loader: "eslint-loader"
+    }],
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['react-hot', 'babel'],
+        exclude: /node_modules/,
+        include: __dirname,
+      },
+      {
+        test: /\.css?$/,
+        loaders: ['style', 'css'],
+        include: __dirname
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&minetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
+      }]
   }
 };
