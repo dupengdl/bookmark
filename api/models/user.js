@@ -15,6 +15,6 @@ var UserSchema = new Schema({
   createTime: {type: Date, default: Date.now}
 });
 
-UserSchema.plugin(userPlugin, {});
+UserSchema.plugin(userPlugin);
 
 module.exports = mongoose.model('User', UserSchema);
