@@ -106,7 +106,7 @@ if ('production' === env) {
         app.use(express.static(staticPath));
 
         app.get('*', function(req, res) {
-          res.sendFile(path.join(staticPath, 'index.html'));
+          res.send('404 Not Found');
         });
 
         app.listen(port, function(err) {
