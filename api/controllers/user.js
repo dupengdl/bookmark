@@ -41,7 +41,9 @@ exports.register = function(req, res) {
  * 用户登录
  */
 exports.login = function(req, res, next) {
+  console.log('route.login');
   passport.authenticate('local', function(err, user, info) {
+    console.log('pass.authenticate');
     if (err) {
       return handler.handleError(res, '服务器错误');
     }
@@ -50,6 +52,7 @@ exports.login = function(req, res, next) {
     }
 
     req.logIn(user, function(err) {
+      console.log('pass.logIn');
       if (err) {
         return next(err);
       }

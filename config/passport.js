@@ -11,6 +11,7 @@ var local = new LocalStrategy({
     passwordField: 'password'
   },
   function(email, password, done) {
+    console.log('user.find');
     var options = {
       criteria: { email: email }
     };
@@ -30,10 +31,12 @@ var local = new LocalStrategy({
 module.exports = function (passport) {
   // serialize sessions
   passport.serializeUser(function(user, done) {
+    console.log('pass.serializeUser');
     done(null, user.id)
   })
 
   passport.deserializeUser(function(id, done) {
+    console.log('pass.deserializeUser');
     User.findOne({ _id: id }, function (err, user) {
       done(err, user)
     })
