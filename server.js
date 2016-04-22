@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var favicon = require('serve-favicon');
 var passport = require('passport');
 var path = require('path');
 var config = require('./webpack.config');
@@ -39,6 +40,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(favicon(path.join(__dirname, 'app/css/favicon.ico')));
 
 require('./config/passport')(passport);
 
