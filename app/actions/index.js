@@ -62,6 +62,27 @@ export function requestLogin(email, password, redirect) {
 }
 
 /**
+ * 用户登出
+ */
+function logout(redirect) {
+  return {
+    type: actions.LOGOUT,
+    redirect: redirect
+  };
+}
+
+export function requestLogout(redirect) {
+  return dispatch => {
+    fetchData(dispatch, '/api/logout', {
+      method: 'post',
+      credentials: 'include'
+    }, function() {
+      dispatch(logout(redirect));
+    });
+  };
+}
+
+/**
  * 获取分类列表
  */
 function categories(categories) {

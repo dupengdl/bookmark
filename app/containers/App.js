@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import Header from '../components/Header';
-import {requestCategoriesWithNoEmpty} from '../actions';
+import {requestLogout, requestCategoriesWithNoEmpty} from '../actions';
 
 class App extends Component {
   constructor(props) {
@@ -9,9 +10,8 @@ class App extends Component {
   }
 
   logout() {
-    const {history} = this.props;
-
-    history.replaceState(null, '/');
+    const {dispatch} = this.props;
+    dispatch(requestLogout('/'));
   }
 
   render() {
@@ -31,4 +31,11 @@ App.PropTypes = {
   logout: PropTypes.Func
 };
 
-export default App;
+function mapStateToProps(state) {
+  const {errorMessage} = state;
+  return {
+    errorMessage
+  };
+}
+
+export default connect(mapStateToProps)(App);

@@ -9,7 +9,7 @@ export default class Header extends Component {
   }
 
   onLogout() {
-    auth.logout();
+    //auth.logout();
     this.props.logout();
   }
 
