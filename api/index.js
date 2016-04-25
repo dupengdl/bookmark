@@ -13,7 +13,7 @@ var router = express.Router();
 
 function needLogin(req, res, next) {
   if (!req.isAuthenticated()) {
-    handler.handleError(res, rtn.NO_LOGIN, '用户未登录');
+    handler.handleError(res, '用户未登录', rtn.NO_LOGIN);
   } else {
     next();
   }
