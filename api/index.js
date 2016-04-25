@@ -23,16 +23,17 @@ router.post('/register', User.register);
 router.post('/login', User.login);
 router.post('/logout', User.logout);
 
+router.get('/categoriesWithNoEmpty', Category.categories);
 router.get('/tags/:categoryId', Tag.index);
 
-router.get('/categories', needLogin, Category.index);
-router.get('/categoriesWithNoEmpty', Category.categories);
-router.get('/categoriesWithSubdoc', needLogin, Category.all);
+router.all('*', needLogin);
+router.get('/categories', Category.index);
+router.get('/categoriesWithSubdoc', Category.all);
 router.post('/category/add', Category.add);
 
-router.post('/tag/add', needLogin, Tag.add);
+router.post('/tag/add', Tag.add);
 
-router.post('/bookmark/add', needLogin, Bookmark.add);
+router.post('/bookmark/add', Bookmark.add);
 
 router.get('*', function(req, res) {
   res.status(404).json({
