@@ -11,18 +11,18 @@ var cookieConfig = require('../../config/cookie');
  * name 用户名
  * password 密码
  */
-exports.register = function(req, res) {
+exports.register = function (req, res) {
   userHelper.create({
     email: req.body.email,
     name: req.body.username,
     password: req.body.password
-  }).then(function(account) {
+  }).then(function (account) {
     passport.authenticate('local')(req, res, function () {
       res.cookie('username', req.user.name, cookieConfig);
 
       handler.send(res);
     });
-  }).catch(function(err) {
+  }).catch(function (err) {
     var msg = '服务器连接失败，请稍后重试';
     if (err && /duplicate/ig.test(err.errmsg)) {
       if (/name/ig.test(err.errmsg)) {
@@ -40,18 +40,18 @@ exports.register = function(req, res) {
 /**
  * 用户登录
  */
-exports.login = function(req, res, next) {
+exports.login = function (req, res, next) {
   console.log('route.login');
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function (err, user, info) {
     console.log('pass.authenticate');
     if (err) {
       return handler.handleError(res, '服务器错误');
     }
-    if(!user) {
+    if (!user) {
       return handler.handleError(res, '邮箱或密码输入有误', rtn.NO_USER);
     }
 
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       console.log('pass.logIn');
       if (err) {
         return next(err);
@@ -65,3 +65,17 @@ exports.login = function(req, res, next) {
 
 };
 
+/**
+ * 用户登出
+ */
+exports.logout = function (req, res, next) {
+  req.session.destroy(function(err){
+    if (err) {
+      return next(err);
+    }
+    req.logOut();
+    res.clearCookie('connect.sid');
+    res.clearCookie('username');
+    handler.send(res);
+  });
+};
