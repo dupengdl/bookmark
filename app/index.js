@@ -39,8 +39,8 @@ ReactDOM.render(
         <Route path="/admin" component={Admin} onEnter={requireAuth}>
           <Route path="/admin/bookmarks" component={AdminBookmarks} />
         </Route>
-        <Route path="/admin/register" component={Register} onEnter={notRequireAuth}/>
-        <Route path="/admin/login" component={Login} onEnter={notRequireAuth}/>
+        <Route path="/admin/register" component={Register}/>
+        <Route path="/admin/login" component={Login}/>
       </Route>
       <Route path="*" component={App}/>
     </Router>
