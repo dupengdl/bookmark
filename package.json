@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "NODE_ENV=production node build.js",
+    "build": "rm -rf public/ && NODE_ENV=production node build.js",
     "prod": "NODE_ENV=production node server.js"
   },
   "author": "wen",
