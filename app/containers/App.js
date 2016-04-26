@@ -31,11 +31,4 @@ App.PropTypes = {
   logout: PropTypes.Func
 };
 
-function mapStateToProps(state) {
-  const {errorMessage} = state;
-  return {
-    errorMessage
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
